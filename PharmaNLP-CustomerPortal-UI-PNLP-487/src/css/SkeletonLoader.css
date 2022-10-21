@@ -1,0 +1,20 @@
+.skeleton-loader-gradient{
+  background-color: #EEEEEE; 
+  background-image: linear-gradient(to right, #EEEEEE,#FFFFFF, #EEEEEE);
+  background-position: left;
+  background-repeat: repeat-y;
+  background-size: 50px 500px;
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
