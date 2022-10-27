@@ -42,7 +42,7 @@ export function SimpleSearchInput({
                 style={{ right: 25, top: 12 }}
                 alt="Search..."
                 onClick={() => simpleSearchHandler()}
-            />
+            />          
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "../../../redux/Hooks";
 import { addRelevantActivePageNumber,addSortedArticle } from "../../../redux/reducers/RelevantArticlesSlice";
 import { Pagination } from "../../../commonComponents/Pagination";
 
+import { Collapse } from '@mui/material';
 
 type RelevantArticlesListsSectionProps = {
   articles: any,
@@ -28,8 +29,7 @@ export function RelevantArticlesListsSection({
   const dispatch = useAppDispatch()
   const { midFont, lowFont } = useAppSelector((state) => state.globalFontResizer);
   const [tags, settags] = useState(["Adverse Events", "D1,A1,P1,R1", "Relevant", "Irrelevant", "No Match", "Adverse Events", "D1,A1,P1,R1", "Relevant", "Irrelevant", "No Match"])  
- 
-  // console.log("data from isrecentlyadded",isrecentlyadded)
+  
   useEffect(() => {
     const objReModHandler = () => {
       let initObj: any = []
@@ -43,10 +43,6 @@ export function RelevantArticlesListsSection({
     objReModHandler()
     
   }, [tags, articles])
-
-
-  
-
   const [newObj, setnewObj] = useState<any>(null)
   const [activeIdToAddTag, setactiveIdToAddTag] = useState<number | null>(null)
   const [enteredInputTag, setenteredInputTag] = useState<string>("")
@@ -134,13 +130,7 @@ export function RelevantArticlesListsSection({
                   {article.title}
                 </p>
               </div>
-              <div
-                className="article-content-box accordian-height-animation"
-                style={{
-                  maxHeight: articlesExpand
-                    ? 300
-                    : 60,
-                }}
+              <div 
               >
                 <p
                   className="no-margin text-dark-gray article-content-view font-change-animation"
@@ -149,8 +139,18 @@ export function RelevantArticlesListsSection({
                   <span className="has-font-weight text-black">
                     Introduction :{" "}
                   </span>
+                  {
+                    articlesExpand?
+                    <Collapse in={articlesExpand}>
+                    {/* {articlesExpand ? article.abstractData : `${article.abstractData.substring(0, 250)}...`} */}
+                    {article.abstractData}
+                    </Collapse>:
+                   `${article.abstractData.substring(0, 350)}...`
+                  }
+                  <Collapse in={articlesExpand}>
                   {/* {articlesExpand ? article.abstractData : `${article.abstractData.substring(0, 250)}...`} */}
                   {article.abstractData}
+                  </Collapse>
                 </p>
               </div>
               <div className="d-flex align-items-center justify-content-between">
@@ -207,10 +207,10 @@ export function RelevantArticlesListsSection({
                 }
               </div>
               <div
-                className="overflow-auto accordian-height-animation"
+                className="overflow-auto "
                 style={{
                   maxHeight: articlesExpand
-                    ? 300
+                    ? ""
                     : 85
                 }}
               >
